@@ -1,0 +1,500 @@
+/* ==========================================================================
+   1. Modern Reset & 디자인 토큰 (변수 정의)
+   ========================================================================== */
+:root {
+    --bg-page: #f4f6f9;
+    --bg-card: #ffffff;
+    --border-color: #e9ecef;
+    
+    /* 테크니컬 컬러 시스템 */
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-light: #e0e7ff;
+    
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    
+    /* 상태 표시 컬러 */
+    --status-success: #10b981;
+    --status-loading: #6b7280;
+    --status-error: #ef4444;
+    
+    /* 그림자 및 라운드 스타일 */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-page);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 40px 20px;
+}
+
+/* ==========================================================================
+   2. Layout & Typography
+   ========================================================================== */
+.page-wrapper {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: #111827;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+/* ==========================================================================
+   3. Control & Filter Container
+   ========================================================================== */
+.control-container {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.control-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.sub-bar {
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.total-count {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-left: auto;
+}
+
+.status-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 동적 생성용 재시도 버튼 */
+#retryBtn {
+    background-color: #fff;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border: 1px solid var(--status-error);
+    color: var(--status-error);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 8px;
+    transition: all 0.2s;
+}
+
+#retryBtn:hover {
+    background-color: #fef2f2;
+}
+
+/* 필터 / 정렬 / 검색 바 */
+.filter-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.filter-group select, 
+.filter-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    background-color: #fff;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: all 0.2s;
+}
+
+.filter-group select:focus, 
+.filter-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* ==========================================================================
+   4. Buttons Style
+   ========================================================================== */
+.btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   5. Form 스타일 (아기사자 추가 구역)
+   ========================================================================== */
+.form-container {
+    background: var(--bg-card);
+    padding: 32px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-group textarea {
+    height: 110px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn-submit {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #fff;
+    color: #9ca3af;
+}
+
+/* ==========================================================================
+   6. Summary Grid & Profile Card (요약 프로필카드)
+   ========================================================================== */
+.summary-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.profile-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: #d1d5db;
+}
+
+/* 내 카드 강조용 테두리 보더 */
+.profile-card[data-is-mine="true"] {
+    border: 2px solid var(--primary);
+}
+.profile-card[data-is-mine="true"]::before {
+    content: "ME";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 10;
+    box-shadow: var(--shadow-sm);
+}
+
+.image-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    background-color: #f3f4f6;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background-color: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.summary-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.summary-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.summary-part {
+    display: inline-block;
+    align-self: flex-start;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.8rem;
+    background-color: #eef2ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.summary-intro {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-top: 4px;
+    word-break: break-all;
+}
+
+/* ==========================================================================
+   7. Detail Section & Card (상세 프로필카드 - 스크린샷 스타일 반영)
+   ========================================================================== */
+.detail-list-container {
+    margin-top: 16px;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 24px;
+    letter-spacing: -0.025em;
+}
+
+.detail-card {
+    background-color: var(--bg-card);
+    border-radius: 20px; /* 조금 더 부드러운 라운드값 */
+    padding: 40px; /* 사방 여백을 넓게 주어 쾌적한 공간 확보 */
+    margin-bottom: 32px; /* 카드와 카드 사이 간격 넓힘 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02); /* 스크린샷처럼 아주 은은한 그림자 */
+    border: 1px solid var(--border-color);
+    transition: all 0.25s ease;
+}
+
+.detail-card-header {
+    border-bottom: none; /* 구분선 제거하여 깔끔하게 변경 */
+    margin-bottom: 28px; 
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column; /* 세로 배열 */
+    gap: 4px;
+}
+
+.detail-card-header h3 {
+    font-size: 2rem; /* 새아기사자 타이틀 크기 키움 */
+    font-weight: 800;
+    color: #1f2937;
+    letter-spacing: -0.03em;
+}
+
+.detail-card-header .detail-part {
+    color: #4f46e5; /* Frontend 브랜드 컬러 */
+    font-weight: 700; 
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.detail-card-header .detail-track {
+    color: #9ca3af; /* LION TRACK 연한 회색 */
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+/* 세로로 넓게 떨어지는 단락 구조 디자인 */
+.detail-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 28px; /* 단락과 단락 사이의 넓은 간격 */
+}
+
+.detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 라벨과 내용 사이의 간격 */
+}
+
+/* 각 항목의 소제목 (자기소개, 연락처 등) */
+.detail-section h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* 일반 본문 텍스트 (자기소개 본문, 한마디) */
+.detail-section p {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+/* 연락처 및 관심 기술의 리스트 스타일 */
+.detail-section ul {
+    list-style-type: disc; /* 동그란 블릿포인트 활성화 */
+    padding-left: 20px; /* 블릿포인트가 들어갈 왼쪽 여백 */
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* 리스트 아이템 간격 */
+}
+
+.detail-section li {
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+/* 링크 컬러 스타일 */
+.detail-section a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+.detail-section a:hover {
+    color: #1d4ed8;
+}
+
+/* 카드 클릭 인터랙션 하이라이트 */
+.highlight-flash {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* ==========================================================================
+   8. Empty State (결과 없음 상태)
+   ========================================================================== */
+.empty-state-box {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--bg-card);
+    border: 2px dashed #d1d5db;
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+}

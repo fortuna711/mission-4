@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아기 사자 대시보드</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="page-wrapper">
+        <h1 class="page-title">멋쟁이사자처럼 아기 사자 명단</h1>
+
+        <div class="control-container">
+            <div class="control-bar">
+                <button class="btn" id="toggleFormBtn">아기 사자 추가</button>
+                <button class="btn" id="deleteLastBtn">마지막 아기 사자 삭제</button>
+                <span class="total-count" id="totalCount">총 0명</span>
+            </div>
+            
+            <div class="control-bar sub-bar">
+                <button class="btn" id="addRandom1Btn">랜덤 1명 추가</button>
+                <button class="btn" id="addRandom5Btn">랜덤 5명 추가</button>
+                <button class="btn" id="refreshAllBtn">전체 새로고침</button>
+                <span class="status-text">준비 완료</span>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>파트</label>
+                    <select id="filterPart">
+                        <option value="전체">전체</option>
+                        <option value="Frontend">Frontend</option>
+                        <option value="Backend">Backend</option>
+                        <option value="Design">Design</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>정렬</label>
+                    <select id="sortOrder">
+                        <option value="latest">최신추가순</option>
+                        <option value="name">이름순</option>
+                    </select>
+                </div>
+                <div class="filter-group search-group">
+                    <label>검색</label>
+                    <input type="text" id="searchName" placeholder="이름으로 검색">
+                </div>
+            </div>
+        </div>
+
+        <section class="form-container" id="formContainer" style="display: none;">
+            <form id="memberForm" class="member-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>이름</label>
+                        <input type="text" id="name" placeholder="예: 홍아기사자" required>
+                    </div>
+                    <div class="form-group">
+                        <label>파트</label>
+                        <select id="part" required>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Backend">Backend</option>
+                            <option value="Design">Design</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>관심 기술 (쉼표로 구분)</label>
+                    <input type="text" id="skills" placeholder="예: JavaScript, React, HTML/CSS" required>
+                </div>
+
+                <div class="form-group">
+                    <label>한 줄 소개 (요약 카드)</label>
+                    <input type="text" id="intro" placeholder="예: 3주차 DOM 조작 연습 중!" required>
+                </div>
+
+                <div class="form-group">
+                    <label>자기소개 (상세 카드)</label>
+                    <textarea id="fullIntro" placeholder="예: HTML/CSS로 구조를 만들고..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" placeholder="예: lion@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="phone" placeholder="예: 010-1234-5678" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Website</label>
+                    <input type="url" id="website" placeholder="예: https://example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>한 마디</label>
+                    <input type="text" id="motto" placeholder="예: 데이터 바꾸면 화면도 바뀐다!" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-random" id="fillRandomBtn">랜덤 값 채우기</button>
+                    <button type="submit" class="btn btn-submit">추가하기</button>
+                    <button type="button" class="btn btn-cancel" id="cancelBtn">취소</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="summary-grid" id="summaryGrid">
+            <article class="profile-card" data-id="member1" data-is-mine="true">
+                <div class="image-box">
+                    <img src="https://cdn.eyesmag.com/content/uploads/posts/2024/10/23/shutterstock_2500953971-3c494ea8-0ac0-4f8d-a962-e47db09215a0.jpg" alt="서예슬">
+                    <span class="badge">HTML / CSS</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">서예슬</h2>
+                    <p class="summary-part">Frontend</p>
+                    <p class="summary-intro">열심히 배우는 프론트엔드 개발자입니다!</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="인공지능공학부" data-email="mlnblmn0711@naver.com" data-phone="010-3769-1500" data-motto="기초를 탄탄하게 다져서 팀에 도움이 되고 싶습니다." data-fullintro="웹 개발을 처음 접했지만, 기초부터 차근차근 열심히 배우고 있습니다. 작은 UI 하나라도 왜 이렇게 만들어졌는지 이해하려고 노력합니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member2" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=300" alt="박현빈">
+                    <span class="badge">기획 문서 작성</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">박현빈</h2>
+                    <p class="summary-part">PM</p>
+                    <p class="summary-intro">서비스의 가치를 고민하는 기획자입니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="인공지능공학부" data-email="hyunbin@lion.com" data-phone="010-1234-5678" data-motto="함께 성장하는 즐거움을 아는 기획자가 되겠습니다." data-fullintro="사용자가 진정으로 필요로 하는 것이 무엇인지 정의하고 프로젝트의 방향성을 설정하는 과정을 즐깁니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member3" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=300" alt="김민수">
+                    <span class="badge">Java</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">김민수</h2>
+                    <p class="summary-part">Backend</p>
+                    <p class="summary-intro">효율적인 데이터 흐름을 설계합니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="인공지능공학부" data-email="minsu@lion.com" data-phone="010-2345-6789" data-motto="끊임없이 질문하고 성장하는 백엔드 개발자가 되겠습니다." data-fullintro="데이터의 흐름을 파악하고 안정적인 서버 환경을 구축하는 것에 큰 흥미를 느끼고 있습니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member4" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=300" alt="허찬">
+                    <span class="badge">Python</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">허찬</h2>
+                    <p class="summary-part">Backend</p>
+                    <p class="summary-intro">안정적인 백엔드 아키텍처를 추구합니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="컴퓨터공학과" data-email="chan@lion.com" data-phone="010-3456-7890" data-motto="문제를 끝까지 파고드는 끈기 있는 개발자입니다." data-fullintro="복잡한 알고리즘을 최적화하고 코드의 성능을 개선하는 과정에서 성취감을 느낍니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member5" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&q=80&w=300" alt="정연수">
+                    <span class="badge">Figma</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">정연수</h2>
+                    <p class="summary-part">Design</p>
+                    <p class="summary-intro">사용자 중심의 디자인을 고민합니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="인공지능공학부" data-email="yeonsu@lion.com" data-phone="010-4567-8901" data-motto="디자인과 개발의 가교 역할을 하고 싶습니다." data-fullintro="보기 좋은 디자인을 넘어, 사용자가 편리하게 사용할 수 있는 인터페이스를 고민합니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member6" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&q=80&w=300" alt="이사랑">
+                    <span class="badge">React</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">이사랑</h2>
+                    <p class="summary-part">Frontend</p>
+                    <p class="summary-intro">컴포넌트 단위 설계에 관심이 많습니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="정보통신공학과" data-email="sarang@lion.com" data-phone="010-5678-9012" data-motto="코드로 즐거움을 전하는 개발자가 되겠습니다." data-fullintro="사용자에게 가장 먼저 닿는 화면인 프론트엔드의 매력에 빠져 공부하고 있습니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member7" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=300" alt="최지우">
+                    <span class="badge">Spring</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">최지우</h2>
+                    <p class="summary-part">Backend</p>
+                    <p class="summary-intro">대용량 트래픽 처리를 배우고 싶습니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="소프트웨어학과" data-email="jiwoo@lion.com" data-phone="010-6789-0123" data-motto="어제보다 나은 오늘을 만드는 개발자가 되겠습니다." data-fullintro="서버 아키텍처와 분산 시스템에 관심이 많으며, 탄탄한 백엔드를 구축하는 것이 목표입니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member8" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=300" alt="강건우">
+                    <span class="badge">Adobe XD</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">강건우</h2>
+                    <p class="summary-part">Design</p>
+                    <p class="summary-intro">심미성과 기능성의 조화를 추구합니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="산업디자인학과" data-email="gunwoo@lion.com" data-phone="010-7890-1234" data-motto="사용자의 감성을 움직이는 디자인을 합니다." data-fullintro="제품의 정체성을 시각적으로 풀어내는 브랜딩 및 UI 디자인을 병행하고 있습니다."></div>
+            </article>
+
+            <article class="profile-card" data-id="member9" data-is-mine="false">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&q=80&w=300" alt="윤미소">
+                    <span class="badge">JavaScript</span>
+                </div>
+                <div class="summary-content">
+                    <h2 class="summary-name">윤미소</h2>
+                    <p class="summary-part">Frontend</p>
+                    <p class="summary-intro">살아있는 인터랙션을 만드는 개발자입니다.</p>
+                </div>
+                <div class="hidden-data" style="display:none;" data-major="인공지능공학부" data-email="miso@lion.com" data-phone="010-8901-2345" data-motto="긍정적인 에너지를 전파하는 팀원이 되겠습니다." data-fullintro="최신 기술 트렌드에 관심이 많으며, 웹 브라우저에서 가능한 화려한 애니메이션에 흥미가 있습니다."></div>
+            </article>
+        </section>
+
+        <section class="detail-list-container">
+            <h2 class="section-title">아기 사자 상세 프로필</h2>
+            <div id="detailList"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
